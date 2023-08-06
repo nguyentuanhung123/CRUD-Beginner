@@ -1,23 +1,43 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import Table from './components/Table.jsx';
+import Modal from './components/Modal.jsx';
 
 function App() {
+
+  const [modalOpen, setModelOpen] = useState(false);
+
+  const [rows, setRows] = [
+    {
+      page: "Page 1",
+      description: "This is the first page",
+      status: "live"
+    },
+    {
+      page: "Page 2",
+      description: "This is the second page",
+      status: "draft"
+    },
+    {
+      page: "Page 3",
+      description: "This is the third page",
+      status: "error"
+    }
+  ]
+
+  const handleDeleteRow = (targetIndex) => {
+    setRows(rows.filter((_, idx) => idx !== targetIndex))
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Table rows={rows} deleteRow={handleDeleteRow} />
+      <button className='btn' onClick={() => setModelOpen(true)}>Add</button>
+      {
+        modalOpen && <Modal closeModal={() => {
+          setModelOpen(false);
+        }} />
+      }
     </div>
   );
 }
