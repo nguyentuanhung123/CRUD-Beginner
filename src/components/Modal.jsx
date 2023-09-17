@@ -30,6 +30,8 @@ const Modal = ({ closeModal, onSubmit, defaultValue }) => {
         }
     }
 
+    console.log("Error : ", errors);
+
     const handleChange = (e) => {
         setFormState({
             ...formState,
