@@ -25,7 +25,7 @@ const Modal = ({ closeModal, onSubmit, defaultValue }) => {
                     errorFields.push(key);
                 }
             }
-            setErrors(errorFields.join(". "));
+            setErrors(errorFields.join(", "));//mỗi key lỗi sẽ đc ngăn cách nhau bới dấu phấy
             return false;
         }
     }
