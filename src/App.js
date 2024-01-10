@@ -2,10 +2,13 @@ import { useState } from 'react';
 import './App.css';
 import Table from './components/Table.jsx';
 import Modal from './components/Modal.jsx';
+import ModalConfirm from './components/ModalConfirm.jsx';
 
 function App() {
 
   const [modalOpen, setModelOpen] = useState(false);
+
+  const [modelConfirmOpen, setModelConfirmOpen] = useState(false);
 
   const [rows, setRows] = useState([
     {
@@ -48,6 +51,20 @@ function App() {
       )
   }
 
+  const openModalConfirm = (e) => {
+    e.preventDefault();
+    setModelConfirmOpen(true);
+  }
+
+  const closeModalConfirm = () => {
+    setModelConfirmOpen(false);
+  }
+
+  const closeAllModal = () => {
+    setModelOpen(false)
+    setModelConfirmOpen(false);
+  }
+
 
 
   return (
@@ -63,6 +80,15 @@ function App() {
           }}
           onSubmit={handleSubmit}
           defaultValue={rowToEdit !== null && rows[rowToEdit]}
+          openDialog={openModalConfirm}
+        />
+      }
+      {
+        modelConfirmOpen &&
+        <ModalConfirm
+          closeAllModal={closeAllModal}
+          closeDialog={closeModalConfirm}
+          title="Your changes will not save"
         />
       }
     </div>

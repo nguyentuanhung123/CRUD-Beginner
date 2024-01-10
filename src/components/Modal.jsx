@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Modal.css"
 
-const Modal = ({ closeModal, onSubmit, defaultValue }) => {
+const Modal = ({ closeModal, onSubmit, defaultValue, openDialog }) => {
 
     const [formState, setFormState] = useState(
         defaultValue ||
@@ -74,13 +74,22 @@ const Modal = ({ closeModal, onSubmit, defaultValue }) => {
                         </select>
                     </div>
                     {errors && <div className="error">{`Please inclue : ${errors}`}</div>}
-                    <button
-                        type="submit"
-                        className="btn"
-                        onClick={handleSubmit}
-                    >
-                        Submit
-                    </button>
+                    <div className="buttons">
+                        <button
+                            type="submit"
+                            className="btn"
+                            onClick={handleSubmit}
+                        >
+                            Submit
+                        </button>
+                        <button
+                            type="submit"
+                            className="btn"
+                            onClick={openDialog}
+                        >
+                            UnSubmit
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
